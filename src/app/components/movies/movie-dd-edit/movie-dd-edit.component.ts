@@ -1,8 +1,10 @@
+import { Category } from './../../../shared/category';
 import { MoviesService } from './../../../services/movies.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { CategoryiesService } from 'src/app/services/categoryies.service';
 
 @Component({
   selector: 'app-movie-dd-edit',
@@ -13,9 +15,10 @@ export class MovieDdEditComponent implements OnInit {
 
   movieForm: FormGroup;
   submitted: boolean = false;
+  categories!: Category[];
 
   constructor(private formBuilder: FormBuilder,
-    private route: ActivatedRoute, private router: Router,private _movieServies:MoviesService) {
+    private route: ActivatedRoute, private router: Router,private _movieServies:MoviesService,private _categoryiesService:CategoryiesService) {
     
     this.movieForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -26,6 +29,7 @@ export class MovieDdEditComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getCategories();
   }
   get f() { return this.movieForm.controls; }
   onSubmit() {
@@ -35,7 +39,7 @@ export class MovieDdEditComponent implements OnInit {
     formData.append('name', this.movieForm.get('name')?.value);
     formData.append('description', this.movieForm.get('description')?.value);
     formData.append('image', this.movieForm.get('image')?.value);
-    formData.append('category_id', '86');
+    formData.append('category_id',  this.movieForm.get('category_id')?.value);
     for (let [key, value] of formData.entries()) { 
       console.log(`${key}: ${value}`);
     }
@@ -56,5 +60,17 @@ export class MovieDdEditComponent implements OnInit {
     }
     console.log(this.movieForm.value);
     
+  }
+  getCategories() {
+    this._categoryiesService.getCategories().subscribe(
+      (res: any) => {
+        this.categories = res.message;
+        console.log(this.categories);
+        
+      }, (err: any) => {
+        console.log(err);
+        
+      }
+    )
   }
 }

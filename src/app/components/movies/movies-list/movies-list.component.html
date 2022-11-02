@@ -2,7 +2,12 @@
     <div class="px-5 ">
   <div class="row text-center m-4 d-flex">
 <div class="col-md align-items-center align-middle">
-<h4 class="align-middle" >All Movies</h4>
+<!-- <h4 class="align-middle" >All Movies</h4> -->
+<select class="form-select border-0 border-bottom fs-5 w-50" aria-label="Default select example"(change)="movieByCategory($event.target)" >
+  <option value="">All Movies</option> 
+  <option 
+    *ngFor="let category of categories" [value]="category.id">
+    {{category.name}}</option></select>
 
 </div>
 <div class="col-md">
@@ -10,7 +15,7 @@
 
 </div>
   </div>
-      <div class="row bg-light p-3 rounded-3 shadow">
+      <div class="row bg-light p-3 rounded-3 shadow mb-5 justify-content-center">
         <!-- Gallery item -->
         <div class="col-xl-3 col-lg-4 col-md-6 mb-4" *ngFor="let movie of movies">
           <div class="bg-white rounded shadow-sm"><img [src]="URL+'/'+movie.image" style="height: 250px;" alt="" class="img-fluid card-img-top">
@@ -18,16 +23,19 @@
               <p> <a href="#" class="text-dark fw-bold ">{{movie.name}}</a> <span class="text-muted"> (category)</span></p>
               <p class="small text-muted mb-0">{{movie.description}}</p>
               <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
-                <p class="small mb-0" routerLink="/movies/edit/1">
+                <p class="small mb-0" routerLink="/movies/edit/{{movie.id}}">
                     <i class="fa fa-picture-o mr-2"></i>
-                    <span class="font-weight-bold edit-del rounded-pill px-4 bg-info">Edit</span></p>
+                    <span class="font-weight-bold edit-del rounded-pill px-4 bg-info text-white">Edit</span></p>
                 <div class="badge badge-danger px-3 rounded-pill font-weight-normal bg-danger edit-del">Delete</div>
               </div>
             </div>
           </div>
         </div>
         <!-- End -->
-  
+  <div *ngIf="movies?.length == 0">
+    <h4 class="text-warning">Oops </h4>
+    <p>there is no Movies but you can add some .</p>
+  </div>
        
   
       </div>

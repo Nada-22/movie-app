@@ -13,4 +13,8 @@ export class CategoryiesService {
     return this.http.get(`${this.url}/api/category`);
     
   }
+  movieByCategories(id:number) {
+    return this.http.get(`${this.url}/api/moviesByCategory/${id}`);
+    
+  }
 }

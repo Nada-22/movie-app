@@ -17,4 +17,5 @@ export class UserService {
   logIn(user: User): Observable<any> {
     return this.http.post(`${this.url}/api/login`, user);
   }
+  
 }
