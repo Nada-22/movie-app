@@ -1,3 +1,4 @@
+import { Movie } from 'src/app/shared/movie.model';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +11,10 @@ export class MoviesService {
   constructor(private http: HttpClient) {}
 
   getMovies(){
-      return this.http.get(`${this.url}/api/movies`)
+    return this.http.get(`${this.url}/api/movies`);
+  }
+  addMovie(movie:any) {
+    return this.http.post(`${this.url}/api/movies`,movie);
+    
   }
 }

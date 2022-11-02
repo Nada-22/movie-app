@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {FormsModule} from '@angular/forms'
 import { AuthInterceptor } from './_helpers/auth.interceptor';
+import { AfterloginGuard } from './guard/afterlogin.guard';
 @NgModule({
   declarations: [
     AppComponent
@@ -21,7 +22,7 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },AfterloginGuard
   ],
   bootstrap: [AppComponent]
 })

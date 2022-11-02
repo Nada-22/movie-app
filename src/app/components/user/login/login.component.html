@@ -8,13 +8,24 @@
             <div class="container-fluid">
                 
                 <div class="row">
-                    <div  class="form-group">
-                        <div class="row">
-                            <input type="text" name="username" id="username" class="form__input" placeholder="Username">
+                    <form [formGroup]="loginForm" (ngSubmit)="logIn()"  class="form-group">
+                        <div class="row my-5">
+                            <input type="email" formControlName="email" name="email" id="email" class=" form-control login" 
+                            placeholder="Enter Your Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-start">
+                              <div *ngIf="f.email.errors.required">email required</div>
+                              <div *ngIf="f.email.errors.email">enter a valid email</div>
+                            </div>
+
                         </div>
-                        <div class="row">
+                        <div class="row my-5">
                             <!-- <span class="fa fa-lock"></span> -->
-                            <input type="password" name="password" id="password" class="form__input" placeholder="Password">
+                            <input type="password" formControlName="password" name="password" id="password" class="form-control login"
+                             placeholder="Enter Your Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback text-start">
+                               <div *ngIf="f.password.errors.required">password required</div>
+                               
+                             </div>
                         </div>
                         <div class="row d-flex justify-content-start">
                             <div class="col-md-1">
@@ -25,11 +36,14 @@
                                 <label for="remember_me ">Remember Me!</label>
                             </div>
                         </div>
-                        <div class="row">
-                            <input (click)="logIn()" type="submit" value="Submit" class="btn">
+                        <div class="row justify-content-lg-start"> 
+                            <div class="col-md-6 text-start">
+
+                                <input type="submit" value="Submit" class="btn">
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    <!-- </div> -->
+                </form>
                 <div class="row d-flex justify-content-start">
                     <div class="col-md text-start">
 

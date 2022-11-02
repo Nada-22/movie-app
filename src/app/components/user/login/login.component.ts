@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  submitted: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute, private router: Router,private userService: UserService) {
@@ -26,11 +27,17 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   logIn() {
-    this.userService.logIn({email:'test24@test.com',password:'aghed11'}).subscribe(
+    this.submitted = true;
+    console.log(this.loginForm.value);
+    
+    this.userService.logIn(this.loginForm.value).subscribe(
       (res: any) => {
         console.log(res);
+        if(res.status == 'success'){
         console.log(res.authorisation.token);
-        localStorage.setItem('access_token',res.authorisation.token)
+        localStorage.setItem('access_token', res.authorisation.token)
+          this.router.navigate(['/movies']);
+        }
         
       }, (err: any) => {
         console.log(err);

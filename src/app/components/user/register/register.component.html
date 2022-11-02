@@ -8,13 +8,31 @@
             <div class="container-fluid">
                 
                 <div class="row">
-                    <form control="" class="form-group">
-                        <div class="row">
-                            <input type="text" name="username" id="username" class="form__input" placeholder="Username">
+                    <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="form-group">
+                        <div class="row my-5">
+                            <input type="name" formControlName="name"  name="name" id="name" class="login form-control"
+                            placeholder="Enter Your name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"/>
+                             <div *ngIf="submitted && f.name.errors" class="invalid-feedback text-start">
+                               <div *ngIf="f.name.errors.required">name required</div>
+                               
+                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row my-5">
+                            <input type="email" formControlName="email"  name="email" id="email" class="login form-control"
+                            placeholder="Enter Your Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+                             <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-start">
+                               <div *ngIf="f.email.errors.required">email required</div>
+                               <div *ngIf="f.email.errors.email">enter a valid email</div>
+                             </div>
+                        </div>
+                        <div class="row my-5">
                             <!-- <span class="fa fa-lock"></span> -->
-                            <input type="password" name="password" id="password" class="form__input" placeholder="Password">
+                            <input type="password" formControlName="password"  name="password" id="password" class="login form-control"
+                            placeholder="Enter Your Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback text-start">
+                               <div *ngIf="f.password.errors.required">password required</div>
+                               
+                             </div>
                         </div>
                         <div class="row d-flex justify-content-start">
                             <div class="col-md-1">
