@@ -1,3 +1,4 @@
+import { MovieEdit } from 'src/app/shared/movieEdit';
 import { Movie } from 'src/app/shared/movie.model';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -15,6 +16,13 @@ export class MoviesService {
   }
   addMovie(movie:any) {
     return this.http.post(`${this.url}/api/movies`,movie);
+  }
+  updateMovie(id: number, movie: MovieEdit) {
+    // movie._method = 'put';
+    return this.http.post(`${this.url}/api/movies/${id}`, movie );
+  }
+  showMovie(id:number) {
+    return this.http.get(`${this.url}/api/movies/${id}`);
     
   }
 }

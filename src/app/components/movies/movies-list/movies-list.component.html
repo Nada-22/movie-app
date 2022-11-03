@@ -1,16 +1,16 @@
 <div class="container-fluid">
     <div class="px-5 ">
-  <div class="row text-center m-4 d-flex">
-<div class="col-md align-items-center align-middle">
+  <div class="row text-center m-4 d-flex justify-content-around">
+<div class="col-md-3 col-xs-6 align-items-center align-middle">
 <!-- <h4 class="align-middle" >All Movies</h4> -->
-<select class="form-select border-0 border-bottom fs-5 w-50" aria-label="Default select example"(change)="movieByCategory($event.target)" >
+<select class="form-select border-0 border-bottom fs-5 " aria-label="Default select example"(change)="movieByCategory($event.target)" >
   <option value="">All Movies</option> 
   <option 
     *ngFor="let category of categories" [value]="category.id">
     {{category.name}}</option></select>
 
 </div>
-<div class="col-md">
+<div class="col-md-4 col-xs-6">
 <a  class="btn btn-info " style="margin-top: 0;" routerLink="/movies/add"> Add Movie</a>
 
 </div>
@@ -32,12 +32,11 @@
           </div>
         </div>
         <!-- End -->
-  <div *ngIf="movies?.length == 0">
-    <h4 class="text-warning">Oops </h4>
-    <p>there is no Movies but you can add some .</p>
-  </div>
-       
-  
+        <div *ngIf="movies?.length == 0">
+          <h4 class="text-warning">Oops </h4>
+          <p>there is no Movies but you can add some .</p>
+        </div>
+    
       </div>
     </div>
   </div>
