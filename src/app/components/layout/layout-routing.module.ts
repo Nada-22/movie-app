@@ -1,3 +1,4 @@
+import { AfterloginGuard } from './../../guard/afterlogin.guard';
 import { HeaderComponent } from './header/header.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: 'movies', 
-        loadChildren: () => import('../movies/movies.module').then(m => m.MoviesModule)
+        loadChildren: () => import('../movies/movies.module').then(m => m.MoviesModule),canActivate:[AfterloginGuard]
       },
     ]
   },

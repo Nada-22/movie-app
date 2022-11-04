@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
       }
         
       }, (err: any) => {
-        Swal.close();
+        // Swal.close();
         console.log(err);
         Swal.fire({
           position: 'center',

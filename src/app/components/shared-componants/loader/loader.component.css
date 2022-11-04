@@ -1,5 +1,5 @@
 .loading-spinner{    
-    background-color: #7a76761f;
+    background-color: rgb(243, 243, 243);
     position: absolute;
     width: 100%;
     top: 0px;
@@ -8,6 +8,8 @@
     align-items: center;
     justify-content: center;
     display: grid;
+    opacity: .9;
+
 }
 
 .spinner-border{

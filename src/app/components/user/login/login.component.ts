@@ -30,12 +30,13 @@ export class LoginComponent implements OnInit {
   logIn():void {
     this.submitted = true;
     console.log(this.loginForm.value);
+    if (this.loginForm.invalid) return;
     
     this.userService.logIn(this.loginForm.value).subscribe(
       (res: any) => {
         console.log(res);
         if (res.status == 'success') {
-          Swal.close();
+          // Swal.close();
         console.log(res.authorisation.token);
         localStorage.setItem('access_token', res.authorisation.token)
           this.router.navigate(['/movies']);
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
         
       }, (err: any) => {
         console.log(err);
-        Swal.close();
+        // Swal.close();
         if (err.status === 401) {
           Swal.fire({
             position: 'center',

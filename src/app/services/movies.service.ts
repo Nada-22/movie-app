@@ -23,6 +23,9 @@ export class MoviesService {
   }
   showMovie(id:number) {
     return this.http.get(`${this.url}/api/movies/${id}`);
+  }
+  deleteMovie(id:number) {
+    return this.http.post(`${this.url}/api/movies/${id}`,{_method:"delete"});
     
   }
 }

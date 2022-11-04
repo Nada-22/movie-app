@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/shared/movie.model';
 import { CategoryiesService } from 'src/app/services/categoryies.service';
 import { Category } from 'src/app/shared/category';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-movies-list',
@@ -15,6 +16,7 @@ export class MoviesListComponent implements OnInit {
   URL = environment.API_Domain;
   categories!: Category[];
   dataUploaded = false;
+ 
   constructor(private _moviesServise:MoviesService,private _categoryiesService:CategoryiesService) { }
 
   ngOnInit(): void {

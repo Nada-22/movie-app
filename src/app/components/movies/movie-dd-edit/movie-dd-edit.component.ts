@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { CategoryiesService } from 'src/app/services/categoryies.service';
 import { environment } from 'src/environments/environment';
 import { MovieEdit } from 'src/app/shared/movieEdit';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-movie-dd-edit',
@@ -42,6 +43,8 @@ export class MovieDdEditComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     console.log(this.movieForm.value);
+    if (this.movieForm.invalid) return;
+
     const formData = new FormData();
     formData.append('name', this.movieForm.get('name')?.value);
     formData.append('description', this.movieForm.get('description')?.value);
@@ -107,11 +110,35 @@ export class MovieDdEditComponent implements OnInit {
     
     console.log(this.movie);
     this._movieServies.updateMovie(this.movieID, movie).subscribe(
-      (res: any) => {
+       (res: any) => {
         console.log(res);
+        if (res.status == 'success') {
+         
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Movie Updated successfully',
+            // text: "You won't be able to revert this!",
+            showConfirmButton: true,
+            // timer: 2000
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              this.router.navigate(['/movies']);
+            } 
+          })
+          
+        }
         
       }, (err: any) => {
         console.log(err);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Something is error please try again later',
+          showConfirmButton: true,
+          // timer: 2000
+        })
         
       }
     )
@@ -120,9 +147,32 @@ export class MovieDdEditComponent implements OnInit {
     this._movieServies.addMovie(movie).subscribe(
       (res: any) => {
         console.log(res);
-        
+        if (res.status == 'success') {
+         
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Movie Added successfully',
+            // text: "You won't be able to revert this!",
+            showConfirmButton: true,
+            // timer: 2000
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              this.router.navigate(['/movies']);
+            } 
+          })
+          
+        }
       }, (err: any) => {
         console.log(err);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Something is error please try again later',
+          showConfirmButton: true,
+          // timer: 2000
+        })
         
       }
     )
