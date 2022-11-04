@@ -23,6 +23,9 @@
                              <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-start">
                                <div *ngIf="f.email.errors.required">email required</div>
                                <div *ngIf="f.email.errors.email">enter a valid email</div>
+                               <div *ngFor="let error of f.email.errors?.server ">
+                                {{ error }}
+                              </div> 
                              </div>
                         </div>
                         <div class="row my-5">
@@ -31,6 +34,7 @@
                             placeholder="Enter Your Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
                              <div *ngIf="submitted && f.password.errors" class="invalid-feedback text-start">
                                <div *ngIf="f.password.errors.required">password required</div>
+                               <div *ngIf="f.password.errors.minlength">The password must be at least 5 characters.</div>
                                
                              </div>
                         </div>

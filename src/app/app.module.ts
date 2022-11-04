@@ -9,7 +9,8 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { AfterloginGuard } from './guard/afterlogin.guard';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,
