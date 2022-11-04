@@ -28,9 +28,9 @@ export class MoviesListComponent implements OnInit {
       (res: any) => {
         this.dataUploaded = true;
         this.movies = res.message;
-        console.log(this.movies);
+        //console.log(this.movies);
       }, (err: any) => {
-        console.log(err);
+        //console.log(err);
         
     }
   )
@@ -39,26 +39,26 @@ export class MoviesListComponent implements OnInit {
     this._categoryiesService.getCategories().subscribe(
       (res: any) => {
         this.categories = res.message;
-        console.log(this.categories);
+        //console.log(this.categories);
         
       }, (err: any) => {
-        console.log(err);
+        //console.log(err);
         
       }
     )
   }
   movieByCategory(e: any) {
-    console.log(e.value);
+    //console.log(e.value);
     
     if (e.value) {
       
       this._categoryiesService.movieByCategories(e.value).subscribe(
         (res: any) => {
           this.movies = res.message;
-          console.log(res);
+          //console.log(res);
           
         }, (err: any) => {
-          console.log(err);
+          //console.log(err);
           
         }
       )

@@ -35,7 +35,7 @@ export class DeleteMovieComponent implements OnInit {
           
             this._moviesServise.deleteMovie(id).subscribe(
               (res: any) => {
-                console.log(res);
+                //console.log(res);
                 Swal.fire({
                   position: 'center',
                   icon: 'success',
@@ -46,7 +46,7 @@ export class DeleteMovieComponent implements OnInit {
                this.deleteFromDom(id)
     
               }, (err: any) => {
-                console.log(err);
+                //console.log(err);
                 
              }
            )
@@ -65,6 +65,6 @@ export class DeleteMovieComponent implements OnInit {
     movieid!.querySelector("div")!.style.border = "1px solid red ";
     movieid!.querySelector("div")!.style.opacity = ".5";
     movieid!.querySelector("div")!.style.backgroundColor = "red";
-    console.log(movieid);
+    //console.log(movieid);
   }
 }

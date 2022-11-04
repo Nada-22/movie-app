@@ -1,3 +1,4 @@
+import { MaxlengthPipe } from './../../pipes/maxlength.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,13 +13,15 @@ import { DeleteMovieComponent } from './delete-movie/delete-movie.component';
   declarations: [
     MoviesListComponent,
     MovieDdEditComponent,
-    DeleteMovieComponent
+    DeleteMovieComponent,
+    MaxlengthPipe
   ],
   imports: [
     CommonModule,
     MoviesRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ]
 })
 export class MoviesModule { }

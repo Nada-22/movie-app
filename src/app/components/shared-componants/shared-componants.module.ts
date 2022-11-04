@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './loader/loader.component';
-import { SharedComponentsRoutingModule } from './movies-routing.module';
 
 
 
@@ -11,7 +10,6 @@ import { SharedComponentsRoutingModule } from './movies-routing.module';
   ],
   imports: [
     CommonModule,
-    SharedComponentsRoutingModule
   ],
   exports: [LoaderComponent]
 })

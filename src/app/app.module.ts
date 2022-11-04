@@ -10,9 +10,12 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { AfterloginGuard } from './guard/afterlogin.guard';
 import { LoaderService } from './services/loader.service';
 import { LoaderInterceptor } from './_helpers/Loader.Interceptor';
+import { MaxlengthPipe } from './pipes/maxlength.pipe';
 @NgModule({
   declarations: [
     AppComponent,
+    // MaxlengthPipe,
+    
     
   ],
   imports: [
@@ -21,7 +24,7 @@ import { LoaderInterceptor } from './_helpers/Loader.Interceptor';
     HttpClientModule,
     FormsModule,
     SharedComponantsModule
-  ],
+  ],exports: [],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
