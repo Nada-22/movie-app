@@ -1,3 +1,4 @@
+import { SharedComponantsModule } from './components/shared-componants/shared-componants.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -7,6 +8,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {FormsModule} from '@angular/forms'
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { AfterloginGuard } from './guard/afterlogin.guard';
+import { LoaderService } from './services/loader.service';
+import { LoaderInterceptor } from './_helpers/Loader.Interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,14 +19,19 @@ import { AfterloginGuard } from './guard/afterlogin.guard';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SharedComponantsModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    },AfterloginGuard
+    },
+    AfterloginGuard,
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent]
 })

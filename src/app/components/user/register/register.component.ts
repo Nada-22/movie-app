@@ -31,40 +31,67 @@ export class RegisterComponent implements OnInit {
   signUp():void {
     this.submitted = true;
     console.log(this.signUpForm.value);
-    if( this.signUpForm.invalid ) return;
-    Swal.fire({
-      title: 'Loading ...',
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading()
-      
-        this.userService.signUp(this.signUpForm.value).subscribe(
-          (res: any) => {
-            console.log(res);
-            Swal.close();
-            if(res.status == 'success'){
-            console.log(res.authorisation.token);
-            localStorage.setItem('access_token', res.authorisation.token);
-            this.router.navigate(['/movies']);
-            } else if (res.status == 'failed') {
-              for ( const key in res.message ) {
-                this.signUpForm.get(key)?.setErrors( { server: res.message[key] } )
-              }
+    if (this.signUpForm.invalid) return;
+    
+    this.userService.signUp(this.signUpForm.value).subscribe(
+      (res: any) => {
+        console.log(res);
+        Swal.close();
+        if(res.status == 'success'){
+        console.log(res.authorisation.token);
+        localStorage.setItem('access_token', res.authorisation.token);
+        this.router.navigate(['/movies']);
+        } else if (res.status == 'failed') {
+          for ( const key in res.message ) {
+            this.signUpForm.get(key)?.setErrors( { server: res.message[key] } )
           }
-            
-          }, (err: any) => {
-            Swal.close();
-            console.log(err);
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: 'Something is error please try again later',
-              showConfirmButton: true,
-              // timer: 2000
-            })
-          }
-        )
       }
-    })
+        
+      }, (err: any) => {
+        Swal.close();
+        console.log(err);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Something is error please try again later',
+          showConfirmButton: true,
+          // timer: 2000
+        })
+      }
+    )
+    // Swal.fire({
+    //   title: 'Loading ...',
+    //   timerProgressBar: true,
+    //   didOpen: () => {
+    //     Swal.showLoading()
+      
+    //     this.userService.signUp(this.signUpForm.value).subscribe(
+    //       (res: any) => {
+    //         console.log(res);
+    //         Swal.close();
+    //         if(res.status == 'success'){
+    //         console.log(res.authorisation.token);
+    //         localStorage.setItem('access_token', res.authorisation.token);
+    //         this.router.navigate(['/movies']);
+    //         } else if (res.status == 'failed') {
+    //           for ( const key in res.message ) {
+    //             this.signUpForm.get(key)?.setErrors( { server: res.message[key] } )
+    //           }
+    //       }
+            
+    //       }, (err: any) => {
+    //         Swal.close();
+    //         console.log(err);
+    //         Swal.fire({
+    //           position: 'center',
+    //           icon: 'error',
+    //           title: 'Something is error please try again later',
+    //           showConfirmButton: true,
+    //           // timer: 2000
+    //         })
+    //       }
+    //     )
+    //   }
+    // })
   }
 }

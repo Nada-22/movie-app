@@ -14,6 +14,7 @@ export class MoviesListComponent implements OnInit {
   movies!: Movie[];
   URL = environment.API_Domain;
   categories!: Category[];
+  dataUploaded = false;
   constructor(private _moviesServise:MoviesService,private _categoryiesService:CategoryiesService) { }
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class MoviesListComponent implements OnInit {
   Movies() {
     this._moviesServise.getMovies().subscribe(
       (res: any) => {
+        this.dataUploaded = true;
         this.movies = res.message;
         console.log(this.movies);
       }, (err: any) => {

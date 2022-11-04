@@ -31,42 +31,69 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     console.log(this.loginForm.value);
     
-    Swal.fire({
-      title: 'Loading ...',
+    this.userService.logIn(this.loginForm.value).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res.status == 'success') {
+          Swal.close();
+        console.log(res.authorisation.token);
+        localStorage.setItem('access_token', res.authorisation.token)
+          this.router.navigate(['/movies']);
+          
+        }
+        
+      }, (err: any) => {
+        console.log(err);
+        Swal.close();
+        if (err.status === 401) {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'email or password Incorrect',
+            showConfirmButton: true,
+            // timer: 2000
+          })
+        }
+
+        
+      }
+    )
+    // Swal.fire({
+    //   title: 'Loading ...',
     
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading()
+    //   timerProgressBar: true,
+    //   didOpen: () => {
+    //     Swal.showLoading()
       
-        this.userService.logIn(this.loginForm.value).subscribe(
-          (res: any) => {
-            console.log(res);
-            if (res.status == 'success') {
-              Swal.close();
-            console.log(res.authorisation.token);
-            localStorage.setItem('access_token', res.authorisation.token)
-              this.router.navigate(['/movies']);
+    //     this.userService.logIn(this.loginForm.value).subscribe(
+    //       (res: any) => {
+    //         console.log(res);
+    //         if (res.status == 'success') {
+    //           Swal.close();
+    //         console.log(res.authorisation.token);
+    //         localStorage.setItem('access_token', res.authorisation.token)
+    //           this.router.navigate(['/movies']);
               
-            }
+    //         }
             
-          }, (err: any) => {
-            console.log(err);
-            Swal.close();
-            if (err.status === 401) {
-              Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'email or password Incorrect',
-                showConfirmButton: true,
-                // timer: 2000
-              })
-            }
+    //       }, (err: any) => {
+    //         console.log(err);
+    //         Swal.close();
+    //         if (err.status === 401) {
+    //           Swal.fire({
+    //             position: 'center',
+    //             icon: 'error',
+    //             title: 'email or password Incorrect',
+    //             showConfirmButton: true,
+    //             // timer: 2000
+    //           })
+    //         }
 
             
-          }
-        )
-      }
-    })
+    //       }
+    //     )
+    //   }
+    // })
    
     
   }
