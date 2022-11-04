@@ -22,9 +22,9 @@ export class MovieDdEditComponent implements OnInit {
   URL = environment.API_Domain;
   imgScr!: string;
   movieID!: number;
-  movie= new MovieEdit()
+  movie = new MovieEdit()
   constructor(private formBuilder: FormBuilder,
-    private route: ActivatedRoute, private router: Router,private _movieServies:MoviesService,private _categoryiesService:CategoryiesService) {
+    private route: ActivatedRoute, private router: Router, private _movieServies: MoviesService, private _categoryiesService: CategoryiesService) {
     
     this.movieForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -32,7 +32,7 @@ export class MovieDdEditComponent implements OnInit {
       image: ['', [Validators.required]],
       category_id: ['', [Validators.required]],
     });
-   }
+  }
 
   ngOnInit(): void {
     this.getCategories();
@@ -46,26 +46,18 @@ export class MovieDdEditComponent implements OnInit {
     formData.append('name', this.movieForm.get('name')?.value);
     formData.append('description', this.movieForm.get('description')?.value);
     formData.append('image', this.movieForm.get('image')?.value);
-    formData.append('category_id',  this.movieForm.get('category_id')?.value);
+    formData.append('category_id', this.movieForm.get('category_id')?.value);
     // for (let [key, value] of formData.entries()) { 
-      //   console.log(`${key}: ${value}`);
-      // }
+    //   console.log(`${key}: ${value}`);
+    // }
     if (this.movieID) {
-        formData.append('_method','put');
-        this.updateMovie(formData);
-        return;
-      }
-    this._movieServies.addMovie(formData).subscribe(
-      (res: any) => {
-        console.log(res);
-        
-      }, (err: any) => {
-        console.log(err);
-        
-      }
-    )
+      formData.append('_method', 'put');
+      this.updateMovie(formData);
+      return;
+    }
+   this.addMovie(formData)
   }
-  onFileSelect(event:any) {
+  onFileSelect(event: any):void {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       console.log(file);
@@ -75,7 +67,7 @@ export class MovieDdEditComponent implements OnInit {
     console.log(this.movieForm.value);
     
   }
-  getCategories() {
+  getCategories():void {
     this._categoryiesService.getCategories().subscribe(
       (res: any) => {
         this.categories = res.message;
@@ -87,8 +79,8 @@ export class MovieDdEditComponent implements OnInit {
       }
     )
   }
-  getMovie() {
-    this.movieID  = this.route.snapshot.paramMap.get('id') || false as any;
+  getMovie() :void{
+    this.movieID = this.route.snapshot.paramMap.get('id') || false as any;
     console.log(this.movieID);
     if (!this.movieID) return;
     this._movieServies.showMovie(this.movieID).subscribe(
@@ -100,7 +92,7 @@ export class MovieDdEditComponent implements OnInit {
           category_id: res.message.category.id,
           image: res.message.image,
         })
-        this.imgScr = this.URL + '/'+res.message.image;
+        this.imgScr = this.URL + '/' + res.message.image;
         console.log(this.movieForm.value);
         
       }, (err: any) => {
@@ -110,7 +102,7 @@ export class MovieDdEditComponent implements OnInit {
     )
     
   }
-  updateMovie(movie:any) {
+  updateMovie(movie: any):void {
     this.movie = this.movieForm.value;
     
     console.log(this.movie);
@@ -124,4 +116,16 @@ export class MovieDdEditComponent implements OnInit {
       }
     )
   }
+  addMovie(movie: any) :void{
+    this._movieServies.addMovie(movie).subscribe(
+      (res: any) => {
+        console.log(res);
+        
+      }, (err: any) => {
+        console.log(err);
+        
+      }
+    )
+  }
+
 }

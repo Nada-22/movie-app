@@ -13,5 +13,7 @@ export class AuthService {
   logout() {
     return localStorage.removeItem('access_token');
   }
- 
+  isLogin() {
+    return(localStorage.getItem('access_token')) ?  true : false;
+ }
 }
