@@ -14,7 +14,7 @@ import { DeleteMovieComponent } from './delete-movie/delete-movie.component';
     MoviesListComponent,
     MovieDdEditComponent,
     DeleteMovieComponent,
-    MaxlengthPipe
+    MaxlengthPipe,
   ],
   imports: [
     CommonModule,
